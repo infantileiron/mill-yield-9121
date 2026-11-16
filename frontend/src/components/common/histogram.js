@@ -1,0 +1,2 @@
+import {fmt} from '../../utils/format.js';
+export function histogram(r){const occupied=r.histogram.filter(b=>b.count>0);const lo=Math.max(0,occupied[0].from-5),hi=Math.min(100,occupied.at(-1).to+5);const bins=r.histogram.filter(b=>b.from>=lo&&b.to<=hi);const max=Math.max(1,...bins.map(b=>b.count));return `<div class="histogram">${bins.map(b=>`<div class="bin"><span>${b.count}</span><i style="height:${b.count/max*180}px"></i><small>${b.from}–${b.to}</small></div>`).join('')}</div><div class="axis-caption">出粉率区间（%） · 等宽 5 个百分点；图形由完整样本计算</div>`;}

@@ -1,0 +1,4 @@
+import {roles} from '../../constants/enums.js';
+import {esc} from '../../utils/format.js';
+const nav=[['batches','01','批次台账'],['inspections','02','检验录入'],['diagnosis','03','分布诊断'],['reports','04','复核报告']];
+export function shell(page,user,content){return `<aside><a class="brand" href="#batches">青禾<span>QINGHE MILL / QUALITY NOTEBOOK</span></a><div class="edition">质检档案 · 2026 / 11</div><nav>${nav.map(([id,n,label])=>`<a href="#${id}" class="${id===page?'active':''}"><i>${n}</i>${label}</a>`).join('')}</nav><div class="side-note">从一粒麦的记录<br>到一批粉的判断。<hr>异常值保留在样本中<br>结论由质量负责人签核</div><div class="identity">${esc(roles[user.role])}<small>${esc(user.email)}</small><button class="text" id="logout">退出登录 ↗</button></div></aside><main><div class="topline">青禾制粉厂 · 质量分析室 <span>3 条产线 / 留痕复核</span></div><div id="notice" hidden></div>${content}</main>`;}

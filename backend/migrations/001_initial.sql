@@ -1,0 +1,4 @@
+-- Schema is applied by SQLAlchemy metadata.create_all at application start.
+-- This migration documents the business keys used for idempotent demo seed.
+-- batches.code UNIQUE; inspections.sample_code UNIQUE; users.email UNIQUE.
+-- reviews stores immutable JSON snapshots, result checksum and approver identity.
