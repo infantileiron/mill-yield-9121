@@ -1,11 +1,11 @@
 import random
 from sqlalchemy import select,func
-from src.config.database import Session,Base,engine
+from src.config.database import Session,Base,engine,ensure_schema
 from src.models.entities import User,Batch,Inspection,Review
 from src.utils.security import password_hash
 from src.services.statistics import diagnose
 def seed():
-    Base.metadata.create_all(engine);rng=random.Random(3101)
+    ensure_schema();rng=random.Random(3101)
     with Session() as db:
         for role in ['admin','analyst','viewer']:
             email=f'{role}@demo.local'

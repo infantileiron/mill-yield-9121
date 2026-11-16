@@ -6,6 +6,7 @@ def quantile(values,p):
     return values[lower]+(values[upper]-values[lower])*(pos-lower)
 def diagnose(rows):
     if len(rows)<5: raise ValueError('至少需要 5 条有效检验记录')
+    rows=sorted(rows,key=lambda x:x['sample_code'])
     vals=sorted(float(x['flour_yield']) for x in rows)
     q1,median,q3=[quantile(vals,p) for p in (.25,.5,.75)]
     iqr=q3-q1;low,high=q1-1.5*iqr,q3+1.5*iqr

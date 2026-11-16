@@ -24,5 +24,8 @@ class InspectionInput(BaseModel):
 class ReviewInput(BaseModel):
     title:str=Field(min_length=2,max_length=120)
     line:Literal["全部","一线","二线","三线"]="全部"
+    month:str=Field(default="全部",pattern=r"^(全部|\d{4}-(0[1-9]|1[0-2]))$")
+class ArchiveInput(BaseModel):
+    month:str=Field(pattern=r"^\d{4}-(0[1-9]|1[0-2])$")
 class ApprovalInput(BaseModel):
     note:str=Field(min_length=5,max_length=1500)

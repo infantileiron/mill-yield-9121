@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
-from src.config.database import Base,engine,Session
+from src.config.database import Base,engine,Session,ensure_schema
 from src.models import entities
 from src.routes.api import router
 from src.middlewares.audit import AuditMiddleware
@@ -11,7 +11,7 @@ from src.middlewares.rate_limit import RateLimitMiddleware
 from src.services.business import queue
 @asynccontextmanager
 async def lifespan(app):
-    Base.metadata.create_all(engine)
+    ensure_schema()
     if os.getenv('SEED_DEMO','true').lower()=='true':
         try:
             from scripts.seed_demo import seed
